@@ -18,7 +18,7 @@ public class ClientInstance {
     }
 
     /**
-     * Base point to implement client connect point.
+     * Base point to implement after client connection logic.
      * @throws IOException
      */
     public void process() throws IOException {
