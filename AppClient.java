@@ -2,14 +2,16 @@ import java.net.*;
 import java.io.*;
 
 /**
- * Client app.
+ * @class AppClient
+ *
+ * Main point of client app.
  */
-public class Client {
+public class AppClient {
 
     public static void main(String[] args) {
         if (args.length < 1 || args.length > 3) {
             System.out.println("USAGE:");
-            System.out.println("Client.java <ip> [<file name in server> [<file name to save>]]");
+            System.out.println("AppClient.java <ip> [<file name in server> [<file name to save>]]");
             return;
         }
 

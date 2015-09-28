@@ -3,7 +3,8 @@ import java.net.Socket;
 
 /**
  * @class ServingRunnable
- * Task for serving client by Server class.
+ *
+ * Task for serving client by AppServer class.
  */
 public class ServingRunnable implements Runnable {
 
@@ -25,7 +26,7 @@ public class ServingRunnable implements Runnable {
         } catch (IllegalFolderException x) {
             System.out.println("Error reading folder \"" + x.getRootFolder() + "\".");
         } catch (IOException x) {
-            System.out.println("Client disconnected.");
+            System.out.println("AppClient disconnected.");
         } finally {
             try {
                 sin.close();
@@ -38,37 +39,37 @@ public class ServingRunnable implements Runnable {
     }
 
     /**
-     * Serves client with specified exclude folder.
-     * @param excludeFolder
+     * Serves client with specified root folder.
+     * @param rootFolder
      * @throws IOException
      * @throws IllegalFolderException
      * @throws Error
      */
-    private void serveClient(String excludeFolder) throws IOException, IllegalFolderException, Error {
-        File folder = new File(excludeFolder);
+    private void serveClient(String rootFolder) throws IOException, IllegalFolderException, Error {
+        File folder = new File(rootFolder);
         File[] files = folder.listFiles();
         if (files == null) {
-            throw new IllegalFolderException(excludeFolder);
+            throw new IllegalFolderException(rootFolder);
         }
 
         String s = "";
         for (int i = 0; i < files.length; i++) {
             if (!files[i].isDirectory()) {
-                s += files[i].getName() + "\n"; //concat names to one string
+                s += files[i].getName() + "\n"; // concat names to one string
             }
         }
         int textLen = s.length();
         byte[] buf = new byte[4096];
 
         for (int i = 0; i < 32; i += 8) {
-            sout.write((byte) (textLen >> i)); //send length byte-by-byte big-endian
+            sout.write((byte) (textLen >> i)); // send length byte-by-byte big-endian
         }
         sout.write(s.getBytes());
         textLen = sin.read();
         sin.read(buf, 0, textLen);
 
         String filename = new String(buf, 0, textLen);
-        System.out.println("Client queries \"" + filename + "\"");
+        System.out.println("AppClient queries \"" + filename + "\"");
 
         int k = 0;
         while (k < files.length && (!filename.equals(files[k].getName()) || files[k].isDirectory())) k++;

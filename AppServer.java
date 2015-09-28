@@ -2,9 +2,11 @@ import java.net.*;
 import java.io.*;
 
 /**
- * Server app.
+ * @class AppServer
+ *
+ * Main point of server app.
  */
-public class Server {
+public class AppServer {
 
     public static void main(String[] args) {
         try {

@@ -3,7 +3,8 @@ import java.net.Socket;
 
 /**
  * @class ClientInstance
- * Instance of client which served by Server class.
+ *
+ * Instance of client which served by AppServer class.
  */
 public class ClientInstance {
 
@@ -102,7 +103,7 @@ public class ClientInstance {
      * @param remain
      * @throws FileNotFoundException
      */
-    private void receiveFile(String serverFilename, String saveFilename, long remain) throws FileNotFoundException{
+    private void receiveFile(String serverFilename, String saveFilename, long remain) throws FileNotFoundException {
         FileOutputStream receiveFile = new FileOutputStream(saveFilename);
         System.out.println("Receiving \"" + serverFilename + "\"...");
 
@@ -116,7 +117,7 @@ public class ClientInstance {
             sin.read(buf, 0, (int) remain);
             receiveFile.write(buf, 0, (int) remain);
             receiveFile.flush();
-        } catch (Exception x) {
+        } catch (IOException x) {
             x.printStackTrace();
         } finally {
             try {

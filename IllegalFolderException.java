@@ -1,9 +1,14 @@
+/**
+ * @class IllegalFolderException
+ *
+ * Exception which throw for non-root predefined folder.
+ */
 public class IllegalFolderException extends IllegalArgumentException {
 
     private String rootFolder;
 
     /**
-     * Public constructor for exception with defined root folder.
+     * Public constructor with root folder definition.
      * @param rootFolder
      */
     public IllegalFolderException(String rootFolder) {
@@ -11,7 +16,7 @@ public class IllegalFolderException extends IllegalArgumentException {
     }
 
     /**
-     * @return Exclude folder.
+     * @return Root folder.
      */
     public String getRootFolder() {
         return rootFolder;
